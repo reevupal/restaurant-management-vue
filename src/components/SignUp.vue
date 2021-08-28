@@ -1,4 +1,5 @@
  <template>
+  <img alt="Vue logo" src="../assets/logo.png">
   <h3>Sign Up</h3>
   <div>
     <input
@@ -38,10 +39,14 @@
     />
 
     <button class="btn" v-on:click="signup()">Sign up</button>
+    <p>
+      <router-link to="/login">Login</router-link>
+    </p>
   </div>
 </template>
  <script>
 import axios from "axios";
+// import router from './router'
 
 export default {
   name: "SignUp",
@@ -65,11 +70,20 @@ export default {
       let result = await axios.post("http://localhost:3000/users", requestdata);
 
       console.log(result);
+      this.$router.push({ name: 'Home' })
     },
   },
 };
 </script>
  <style>
+ #app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 .form-group {
   height: 40px;
   width: 300px;
