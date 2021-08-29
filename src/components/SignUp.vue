@@ -1,5 +1,6 @@
  <template>
-  <img alt="Vue logo" src="../assets/logo.png">
+ <div style="margin-top: 5rem">
+ <img alt="Vue logo" src="../assets/logo-rest.png" style="height: 200px;"/>
   <h3>Sign Up</h3>
   <div>
     <input
@@ -43,6 +44,7 @@
       <router-link to="/login">Login</router-link>
     </p>
   </div>
+ </div>
 </template>
  <script>
 import axios from "axios";
@@ -70,7 +72,11 @@ export default {
       let result = await axios.post("http://localhost:3000/users", requestdata);
 
       console.log(result);
-      this.$router.push({ name: 'Home' })
+      if(result['status'] == 201){
+        localStorage.setItem('user-info',JSON.stringify(result.data))
+        this.$router.push({ name: 'Home' })
+      }
+      
     },
   },
 };
@@ -82,7 +88,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .form-group {
   height: 40px;
